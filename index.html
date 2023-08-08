@@ -1,0 +1,19 @@
+<body>
+    <button onclick="subscribe()">Subscribe to Push Notifications</button>
+    <script>
+        addEventListener('load', async() => {
+            // on page load create a serviceworker's instance
+            let sw = await navigator.serviceWorker.register('./sw.js');
+        });
+
+        async function subscribe() {
+            let sw = await navigator.serviceWorker.ready;
+            // request a push manager to receive notifications by pop up dialog
+            let push = await sw.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: 'BCxNhG17oHiw2fOD6giH0YFriasUJq5kJCBOEqP07dLmyiYBBArNBaNojJAhY8aZYr49vN3vBXKv5EihcfSoEq0'
+            });
+            console.log('Subscription object: ', JSON.stringify(push));
+        }
+    </script>
+</body>
